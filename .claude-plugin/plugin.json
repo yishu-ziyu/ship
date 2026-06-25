@@ -1,0 +1,19 @@
+{
+  "name": "yishuship",
+  "description": "Ship 增强版：PM 层 + 对抗式设计 + 工程执行一体化。在原版 Ship 基础上叠加产品管理能力。",
+  "version": "0.1.0",
+  "author": {
+    "name": "奕枢",
+    "url": "https://github.com/yishu-ziyu"
+  },
+  "repository": "https://github.com/yishu-ziyu/yishuship",
+  "license": "MIT",
+  "keywords": [
+    "ship",
+    "product-management",
+    "workflow",
+    "agent",
+    "pm-intake",
+    "adversarial-design"
+  ]
+}
