@@ -1,0 +1,15 @@
+{
+  "name": "yishuship",
+  "owner": {
+    "name": "奕枢",
+    "url": "https://github.com/yishu-ziyu"
+  },
+  "plugins": [
+    {
+      "name": "yishuship",
+      "source": "./",
+      "description": "Ship 增强版：PM 层 + 对抗式工程 + SkillOpt 自动优化",
+      "version": "0.1.0"
+    }
+  ]
+}
