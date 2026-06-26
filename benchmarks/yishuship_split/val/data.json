@@ -53,5 +53,24 @@
       "范围封顶",
       "Non-goals"
     ]
+  },
+  {
+    "id": "val_arch_001",
+    "scenario": "小公司要做 SaaS 内部工具：销售线索上传 → 自动分配 → 提醒跟进 → 周报汇总。需要选架构。",
+    "stage": "arch-decision",
+    "context": "用户：小公司销售主管 + 销售 5-20 人。形态：Web SaaS。技术栈：非工程师。部署：云端。竞品：HubSpot 重、Airtable 轻。",
+    "ground_truth_keywords": [
+      "形态",
+      "Web",
+      "候选",
+      "MVC",
+      "MVVM",
+      "Serverless",
+      "选择",
+      "理由",
+      "替代",
+      "代价",
+      "约束"
+    ]
   }
 ]

@@ -53,5 +53,21 @@
       "评审",
       "最小"
     ]
+  },
+  {
+    "id": "test_arch_001",
+    "scenario": "团队要做一款独立开发者的 AI 编程助手 CLI。需要选架构。",
+    "stage": "arch-decision",
+    "context": "用户：独立开发者 1-3 人。形态：CLI 工具。技术栈：工程师。部署：本地 + npm/pip 分发。竞品：Cursor（IDE）、Aider（CLI）。",
+    "ground_truth_keywords": [
+      "形态",
+      "CLI",
+      "候选",
+      "选择",
+      "理由",
+      "替代",
+      "代价",
+      "约束"
+    ]
   }
 ]
