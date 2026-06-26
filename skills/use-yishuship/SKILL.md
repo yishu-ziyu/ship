@@ -1,9 +1,10 @@
 ---
 name: use-yishuship
-version: 0.1.0
+version: 0.2.0
 description: >
   yishuship 路由脑：判断请求需要 PM 调研、单个 skill、phase bundle 还是全流程。
   在会话开始、用户说"做个功能"、或意图模糊时使用。
+  v0.2.0 新增：架构选型 vs 架构详细设计的入口分流，避免把选型错分到 arch-design。
 allowed-tools:
   - Read
   - Bash
@@ -45,9 +46,29 @@ Bug / 小修复      → /yishuyishuship:review 或直接修
 | "重构这段" | `/yishuyishuship:refactor` | 四镜头扫描 |
 | "全量交付" | `/yishuyishuship:auto` | 完整流程 |
 | "看看竞品" | `/yishuship:pm-intake` | 调研模式 |
-| "做个系统设计" | `/yishuship:arch-design` | 架构设计 |
+| "做个产品" / "用 X 框架做" | `/yishuship:pm-intake` | **架构选型走 pm-intake Step 1.5** |
+| "选个架构" / "用什么架构" | `/yishuship:pm-intake` → Step 1.5 | 架构选型决策（不直接做详细设计）|
+| "做个系统设计" / "详细架构设计" | `/yishuship:arch-design` | **已知架构后的详细设计**（选型请走 pm-intake）|
 | "写文档" | `/yishuship:write-docs` | 文档生成 |
 | "设计视觉系统" | `/yishuship:visual-design` | DESIGN.md |
+
+### 关键路由规则：架构选型 vs 架构详细设计
+
+**架构选型**（"做什么形态、用什么架构"）走 PM 层：
+- 触发词：选架构 / 用什么技术栈 / X 还是 Y / 单仓还是多仓
+- 路由：`/yishuship:pm-intake` → Step 1.5（架构选型子阶段）
+- 产出：`pm/01.5-architecture-decision.md` + 沉淀 `docs/decisions/DEC-NNNN.md`
+- 理由：选错架构会导致后面所有工作重做，必须在 PM 层决策
+
+**架构详细设计**（"已经定了 X 架构，现在做详细设计"）走工程层：
+- 触发词：详细设计 / 系统设计 / ADRs / API 计划
+- 路由：`/yishuship:arch-design`
+- 产出：通过 `/yishuship:write-docs` 写 design 文档
+- 前提：用户已经知道用什么架构，或上游 pm-intake Step 1.5 已经做完
+
+**意图模糊时**，问用户：「这是要选架构（多个候选挑一个），还是已经定好架构做详细设计？」
+
+不要默认跳过这一步——架构选型属于 PM 层决策，不属于工程层。
 
 ## 与原版 Ship 的区别
 

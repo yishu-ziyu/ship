@@ -1,12 +1,39 @@
 ---
 name: arch-design
+version: 0.2.0
 description: >
   Think through architecture, API/data design, service boundaries, trade-offs,
   and assumptions. Use for system design, ADRs, API plans, and architecture docs;
   then hand off to /yishuship:write-docs. Not visual or implementation planning.
+  v0.2.0 新增：入口分流——架构选型请走 /yishuship:pm-intake Step 1.5，
+  本 skill 假设架构已选定。如果用户意图模糊，先用 AskUserQuestion 确认。
+allowed-tools:
+  - Read
+  - Bash
+  - Write
+  - Agent
+  - AskUserQuestion
+  - TodoWrite
 ---
 
 # Architectural Design
+
+## 入口判断（必读）
+
+**这是详细设计 skill，不是架构选型 skill。** 进入本 skill 前先确认：
+
+- 用户已知架构选型（来自 `pm/01.5-architecture-decision.md` 或用户明示）→ 继续
+- 用户还没选定架构（请求含「选架构」「用什么」「X 还是 Y」）→ **退出本 skill**，引导用户走 `/yishuship:pm-intake` Step 1.5
+
+**意图模糊时**，问用户：
+
+> 「你已经定好用哪个架构了吗？如果没有，建议先走 `/yishuship:pm-intake` 做架构选型（Step 1.5），选完再回来做详细设计——避免选错架构导致返工。」
+
+不要在没有架构决策的情况下直接做详细设计——这是 pm-intake 设计的反 drift 机制。
+
+---
+
+## 本 skill 的范围
 
 Think through system design decisions rigorously before writing them down. This skill is about the **thinking** — requirements, components, trade-offs, boundaries. When the design is ready, you MUST invoke `Skill("write-docs")` to write the design document — do not write the doc inline.
 
