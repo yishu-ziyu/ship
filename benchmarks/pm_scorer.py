@@ -134,6 +134,73 @@ def score_discovery_completeness(text: str) -> float:
     return 0.0
 
 
+# ── 阶段 1.5：架构选型（Architecture Decision）─────────
+
+def score_arch_fingerprint(text: str) -> float:
+    """架构指纹：0=无 1=提到 2=4 项指纹中 3+ 项 3=4 项齐全且有依据。"""
+    has_form = bool(re.search(r'形态|Web|移动|CLI|后端|桌面', text, re.I))
+    has_team = bool(re.search(r'团队|单人|小团队|大团队|用户量', text, re.I))
+    has_stack = bool(re.search(r'技术栈|工程师|非工程师|技术水平', text, re.I))
+    has_deploy = bool(re.search(r'部署|本地|云|边缘|跨平台', text, re.I))
+    count = sum([has_form, has_team, has_stack, has_deploy])
+    if count >= 4: return 3.0
+    if count >= 3: return 2.0
+    if count >= 1: return 1.0
+    return 0.0
+
+
+def score_arch_candidates(text: str) -> float:
+    """候选架构：0=无 1=1 个 2=2-3 个 3=2-3 个+各自关键差异点。"""
+    # 数候选数（用常见架构关键词）
+    arch_keywords = ['MVC', 'MVVM', 'Serverless', 'JAMstack', '微服务', 'Clean Architecture',
+                     'Redux', 'Cobra', 'Electron', 'Tauri', 'Plugin', '微前端']
+    found = [k for k in arch_keywords if re.search(rf'\b{k}\b', text)]
+    if len(found) >= 2 and re.search(r'差异|对比|候选', text, re.I):
+        return 3.0
+    if len(found) >= 2: return 2.0
+    if len(found) >= 1: return 1.0
+    return 0.0
+
+
+def score_arch_decision_evidence(text: str) -> float:
+    """决策证据：0=无 1=选了无理由 2=有理由 3=有理由+因果链+对后续约束。"""
+    has_choice = bool(re.search(r'选定|选择|决定|采用', text, re.I))
+    has_reason = bool(re.search(r'因为|理由|原因|影响', text, re.I))
+    has_causal = bool(re.search(r'因果链|因为.*所以|导致|影响.*选择', text, re.I))
+    has_constraint = bool(re.search(r'约束|影响.*Step|影响.*后续|边界', text, re.I))
+    if has_choice and has_reason and (has_causal or has_constraint): return 3.0
+    if has_choice and has_reason: return 2.0
+    if has_choice: return 1.0
+    return 0.0
+
+
+def score_arch_rejected_alternatives(text: str) -> float:
+    """拒绝的替代方案：0=无 1=提到 2=有拒绝理由 3=有拒绝理由+潜在代价。"""
+    has_rejected = bool(re.search(r'拒绝|被否|替代|备选|排除', text, re.I))
+    has_reason = bool(re.search(r'拒绝.*理由|原因|风险|不适合', text, re.I))
+    has_cost = bool(re.search(r'代价|trade.?off|成本|损失', text, re.I))
+    if has_rejected and has_reason and has_cost: return 3.0
+    if has_rejected and has_reason: return 2.0
+    if has_rejected: return 1.0
+    return 0.0
+
+
+def score_arch_completeness(text: str) -> float:
+    """架构决策文档完整性：检查必需章节。"""
+    required = ['架构指纹', '决策', '替代']
+    found = sum(1 for r in required if _has_section(text, r))
+    if found >= 3: return 3.0
+    if found >= 2: return 2.0
+    if found >= 1: return 1.0
+    return 0.0
+
+
+STAGE_1_5_SCORERS = [
+    score_arch_fingerprint, score_arch_candidates, score_arch_decision_evidence,
+    score_arch_rejected_alternatives, score_arch_completeness,
+]
+
+
 # ── 阶段 2：定义（Define）─────────────────────────
 
 def score_positioning(text: str) -> float:
@@ -723,14 +790,15 @@ STAGE_8_SCORERS = [
 ]
 
 ALL_SCORERS = {
-    "discover": (STAGE_1_SCORERS, 27, 17),
-    "define":   (STAGE_2_SCORERS, 30, 19),
-    "design":   (STAGE_3_SCORERS, 33, 21),
-    "validate": (STAGE_4_SCORERS, 18, 12),
-    "build":    (STAGE_5_SCORERS, 24, 15),
-    "release":  (STAGE_6_SCORERS, 21, 14),
-    "observe":  (STAGE_7_SCORERS, 18, 12),
-    "learn":    (STAGE_8_SCORERS, 18, 12),
+    "discover":      (STAGE_1_SCORERS,   27, 17),
+    "arch-decision": (STAGE_1_5_SCORERS, 15, 10),
+    "define":        (STAGE_2_SCORERS,   30, 19),
+    "design":        (STAGE_3_SCORERS,   33, 21),
+    "validate":      (STAGE_4_SCORERS,   18, 12),
+    "build":         (STAGE_5_SCORERS,   24, 15),
+    "release":       (STAGE_6_SCORERS,   21, 14),
+    "observe":       (STAGE_7_SCORERS,   18, 12),
+    "learn":         (STAGE_8_SCORERS,   18, 12),
 }
 
 
