@@ -4,7 +4,7 @@ version: 0.6.0
 description: >
   Implement from a spec or plan: extract stories, build in safe waves, test,
   commit, and get peer review per story. Use for "implement", "build/code this
-  plan", or targeted fix findings. If no plan exists, use /yishuyishuship:design first.
+  plan", or targeted fix findings. If no plan exists, use /yishuship:design first.
 allowed-tools:
   - Bash
   - Read
@@ -29,7 +29,7 @@ EVERY FINDING NEEDS FILE:LINE + EVIDENCE.
 ## Runtime Resolution
 
 See `../.shared/runtime-resolution.md` for the host/peer concept and
-dispatch commands. In /yishuyishuship:dev, the **host is the primary implementer**
+dispatch commands. In /yishuship:dev, the **host is the primary implementer**
 and the **peer is the independent reviewer**. Prefer a non-host provider
 for cross-model validation; if unavailable, use a fresh same-provider
 session and record the weaker independence in the report.
@@ -40,7 +40,7 @@ Two wave shapes, different dispatch patterns:
 |---|---|---|---|
 | **Single-story** (most common) | Host (you), on current branch | Peer agent | Host — you apply fixes directly |
 | **Multi-story parallel** | Fresh Agent subagents per story, all on the current branch (dependency analysis guarantees their file scopes don't overlap — no worktrees needed) | Peer per story | Fresh Agent subagent dispatch — whoever implemented a story is who fixes it |
-| **Fix mode** (/yishuyishuship:auto review_fix/qa_fix/e2e_fix dispatch) | Host — you | (next phase re-runs its own verification) | Host — you apply fixes directly |
+| **Fix mode** (/yishuship:auto review_fix/qa_fix/e2e_fix dispatch) | Host — you | (next phase re-runs its own verification) | Host — you apply fixes directly |
 
 The independence contract — reviewer MUST differ from implementer —
 is strongest when it uses a different provider and a different session.
@@ -74,7 +74,7 @@ else to fix their code loses that context.
 **Never:**
 - Skip the peer review — every story goes through peer review (or fallback)
   before the wave merges. This is the only cross-validation in the
-  pipeline until /yishuyishuship:review runs.
+  pipeline until /yishuship:review runs.
 - Parallelize stories that share files without dependency analysis
 - Re-implement a full story on FAIL — make targeted surgical fixes
 - Advance to next story without getting a reviewer verdict
@@ -220,7 +220,7 @@ adds new pattern evidence:
 
 ### Fix Mode
 
-When invoked by `/yishuyishuship:auto` with review findings or QA issues to fix,
+When invoked by `/yishuship:auto` with review findings or QA issues to fix,
 operate in fix mode instead of the full wave loop:
 
 1. Read the findings/issues provided by the caller.
@@ -238,7 +238,7 @@ operate in fix mode instead of the full wave loop:
 
 Fix mode skips: wave construction, full pattern-reference inventory,
 dependency analysis, story-based peer review. The fixes are re-validated
-by `/yishuyishuship:auto`'s next-phase dispatch (`/yishuyishuship:review`, `/yishuyishuship:qa`, or the
+by `/yishuship:auto`'s next-phase dispatch (`/yishuship:review`, `/yishuship:qa`, or the
 `post_qa_fix → e2e-recheck` gate), not by dev's internal reviewer.
 
 Return: which findings were fixed, what verification ran, any remaining
@@ -345,7 +345,7 @@ Routing:
 |---|---|
 | Host (single-story wave) | Host — you apply the fix directly |
 | Sub-agent (multi-story wave) | Fresh sub-agent dispatch with the original story + prior implementation summary + FAIL findings |
-| Host in fix mode (/yishuyishuship:auto dispatch) | Host — you apply the fix directly |
+| Host in fix mode (/yishuship:auto dispatch) | Host — you apply the fix directly |
 
 Before dispatching or editing, verify repo state:
 
@@ -537,7 +537,7 @@ Output the report card (read `skills/.shared/report-card.md` for the standard fo
 | .ship/tasks/<task_id>/concerns.md | Residual concerns (if any) |
 
 ### Next Steps
-1. **Review (recommended)** — /yishuyishuship:review to review the full diff
-2. **QA** — /yishuyishuship:qa to test the running application
-3. **Full workflow** — /yishuyishuship:auto to review, QA, refactor, and ship
+1. **Review (recommended)** — /yishuship:review to review the full diff
+2. **QA** — /yishuship:qa to test the running application
+3. **Full workflow** — /yishuship:auto to review, QA, refactor, and ship
 ```

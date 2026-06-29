@@ -1,6 +1,6 @@
 # Independent Investigator — Peer Agent Prompt
 
-Used in Phase 2 of `/yishuyishuship:design`. The peer agent independently
+Used in Phase 2 of `/yishuship:design`. The peer agent independently
 investigates the codebase and produces its own spec. Dispatch it
 **before** the host starts investigating so both runs stay independent.
 

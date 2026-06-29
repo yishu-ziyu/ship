@@ -1,7 +1,7 @@
 # Write Plan — Executable Task Decomposition
 
 How to translate a validated spec into an executable plan. Used by the
-host agent in Phase 5 of `/yishuyishuship:design`.
+host agent in Phase 5 of `/yishuship:design`.
 
 ## Overview
 
@@ -39,7 +39,7 @@ decisions get locked in.
 ```markdown
 # <Task Title> Implementation Plan
 
-> **For agentic workers:** Use /yishuyishuship:dev to implement this plan
+> **For agentic workers:** Use /yishuship:dev to implement this plan
 > task-by-task. Steps use checkbox syntax for tracking.
 
 **Goal:** [One sentence — what this builds]

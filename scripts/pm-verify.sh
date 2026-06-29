@@ -6,7 +6,7 @@ set -u
 #
 # Logic:
 #   1. No active PM state → allow exit
-#   2. Check which PM stages are complete
+#   2. Check which PM stages are complete (Prefer V2, fallback V1)
 #   3. If current stage artifacts missing → block exit with missing list
 #   4. If all required stages complete → allow exit
 
@@ -31,6 +31,9 @@ TASK_ID=$(grep "^task_id:" "$STATE_FILE" 2>/dev/null | head -1 | sed 's/^task_id
 
 TASK_DIR="$CWD/.ship/tasks/$TASK_ID"
 PM_DIR="$TASK_DIR/pm"
+PRODUCT_DIR="$TASK_DIR/product"
+DELIVERY_DIR="$TASK_DIR/delivery"
+PLAN_DIR="$TASK_DIR/plan"
 
 block_with_reason() {
   local reason="$1"
@@ -44,20 +47,49 @@ block_with_reason() {
 MISSING=""
 
 case "$PM_PHASE" in
+  # V2 phases
+  product-type)
+    [ ! -f "$PRODUCT_DIR/00-product-type.yaml" ] && MISSING="$MISSING\n- product/00-product-type.yaml"
+    ;;
+  strategy)
+    [ ! -f "$PRODUCT_DIR/00-product-type.yaml" ] && MISSING="$MISSING\n- product/00-product-type.yaml"
+    [ ! -f "$PRODUCT_DIR/01-strategy.md" ] && MISSING="$MISSING\n- product/01-strategy.md"
+    ;;
+  research)
+    [ ! -f "$PRODUCT_DIR/02-research.md" ] && MISSING="$MISSING\n- product/02-research.md"
+    ;;
+  problem-solution)
+    [ ! -f "$PRODUCT_DIR/03-problem-solution.md" ] && MISSING="$MISSING\n- product/03-problem-solution.md"
+    [ ! -f "$PRODUCT_DIR/04-product-blueprint.md" ] && MISSING="$MISSING\n- product/04-product-blueprint.md"
+    ;;
+  product-spec)
+    [ ! -f "$PRODUCT_DIR/05-model-flow-role.md" ] && MISSING="$MISSING\n- product/05-model-flow-role.md"
+    [ ! -f "$PRODUCT_DIR/06-experience-spec.md" ] && MISSING="$MISSING\n- product/06-experience-spec.md"
+    [ ! -f "$PRODUCT_DIR/07-data-permission-analytics.md" ] && MISSING="$MISSING\n- product/07-data-permission-analytics.md"
+    [ ! -f "$PRODUCT_DIR/08-prd.md" ] && MISSING="$MISSING\n- product/08-prd.md"
+    ;;
+  tech-project-plan)
+    [ ! -f "$PRODUCT_DIR/09-tech-project-plan.md" ] && MISSING="$MISSING\n- product/09-tech-project-plan.md"
+    ;;
+  handoff)
+    [ ! -f "$DELIVERY_DIR/design-spec.md" ] && [ ! -f "$PLAN_DIR/spec.md" ] && MISSING="$MISSING\n- delivery/design-spec.md or plan/spec.md"
+    ;;
+
+  # Legacy phases
   discover)
-    [ ! -f "$PM_DIR/01-discovery.md" ] && MISSING="$MISSING\n- 01-discovery.md（发现报告）"
+    [ ! -f "$PM_DIR/01-discovery.md" ] && MISSING="$MISSING\n- pm/01-discovery.md"
     ;;
   define)
-    [ ! -f "$PM_DIR/01-discovery.md" ] && MISSING="$MISSING\n- 01-discovery.md（发现报告）"
-    [ ! -f "$PM_DIR/02-definition.md" ] && MISSING="$MISSING\n- 02-definition.md（产品定义）"
+    [ ! -f "$PM_DIR/01-discovery.md" ] && MISSING="$MISSING\n- pm/01-discovery.md"
+    [ ! -f "$PM_DIR/02-definition.md" ] && MISSING="$MISSING\n- pm/02-definition.md"
     ;;
   design)
-    [ ! -f "$PM_DIR/02-definition.md" ] && MISSING="$MISSING\n- 02-definition.md（产品定义）"
-    [ ! -f "$PM_DIR/03-design.md" ] && MISSING="$MISSING\n- 03-design.md（设计方案）"
+    [ ! -f "$PM_DIR/02-definition.md" ] && MISSING="$MISSING\n- pm/02-definition.md"
+    [ ! -f "$PM_DIR/03-design.md" ] && MISSING="$MISSING\n- pm/03-design.md"
     ;;
   validate)
-    [ ! -f "$PM_DIR/03-design.md" ] && MISSING="$MISSING\n- 03-design.md（设计方案）"
-    [ ! -f "$PM_DIR/04-validation.md" ] && MISSING="$MISSING\n- 04-validation.md（验证报告）"
+    [ ! -f "$PM_DIR/03-design.md" ] && MISSING="$MISSING\n- pm/03-design.md"
+    [ ! -f "$PM_DIR/04-validation.md" ] && MISSING="$MISSING\n- pm/04-validation.md"
     ;;
   complete)
     # All PM stages done, allow exit

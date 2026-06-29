@@ -92,8 +92,8 @@ Unnecessary work, missed concurrency, and resource waste. **These are refactorin
 | Signal | Why | Redirect to |
 |--------|-----|-------------|
 | "This crashes on X input" | Bug, not structure | /fix or /investigate |
-| "Add feature X" | Feature work, not refactor | /yishuyishuship:auto |
+| "Add feature X" | Feature work, not refactor | /yishuship:auto |
 | Code is already clean but unfamiliar | Learning, not refactoring | Ask questions, read docs |
-| Algorithmic performance problem (wrong data structure, O(n^2) where O(n) exists) | Requires a new approach, not rearranging existing code | /yishuyishuship:dev or /yishuyishuship:auto |
+| Algorithmic performance problem (wrong data structure, O(n^2) where O(n) exists) | Requires a new approach, not rearranging existing code | /yishuship:dev or /yishuship:auto |
 
 **Note:** "This is slow" is NOT an automatic redirect. If the slowness is caused by an efficiency smell (N+1, resource-per-call, overly broad read, missed concurrency), that IS refactoring — Lens 4 handles it. Only redirect when the fix requires a fundamentally different algorithm or architecture.

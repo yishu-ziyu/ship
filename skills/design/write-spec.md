@@ -1,7 +1,7 @@
 # Write Spec — Investigation & Spec Authoring
 
 How to investigate a codebase and write a spec. Used by the host agent
-in Phase 2-3 of `/yishuyishuship:design`.
+in Phase 2-3 of `/yishuship:design`.
 
 ## Overview
 

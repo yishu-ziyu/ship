@@ -114,4 +114,4 @@ trap cleanup EXIT INT TERM
   unless the skill explicitly decided to roll back. That's a per-skill
   policy decision, not a cleanup concern.
 - **Git state** — cleanup never touches the working tree, the index, or
-  branches. That's `/yishuyishuship:handoff`'s job.
+  branches. That's `/yishuship:handoff`'s job.

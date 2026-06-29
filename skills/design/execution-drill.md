@@ -1,6 +1,6 @@
 # Execution Drill — Peer Agent Prompt
 
-Used in Phase 6 of `/yishuyishuship:design`. The peer agent reviews the plan for
+Used in Phase 6 of `/yishuship:design`. The peer agent reviews the plan for
 implementability and writing-plans format compliance.
 
 Use a **new** peer session, not the investigation thread.

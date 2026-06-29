@@ -92,11 +92,9 @@ python scripts/eval_only.py \
 
 ## 评分体系
 
-- 8 个标准阶段 × 各 18-33 分 = 187 分
-- 1 个 arch-decision 阶段 × 15 分
-- **全流程总分：202 分（189 + 13 = 修正后）**
-
-> 注：原 `pm_scorer.py` 总分 189 (8 阶段)，加 arch-decision 后应为 189 + 15 = 204。但 `score_full_pipeline` 总分算法未更新——本指南**不算**总分，仅按阶段看分数。
+- 21 product lifecycle checkpoints × 3 quality dimensions × 3 points = 189 分
+- 质量维度包含：presence (是否存在)、evidence (是否有证据/推理)、actionability (是否可行动/闭环)
+- `pm_scorer.py` 内部保留了原版 `score_stage()` 和 `score_full_pipeline()`，同时新增了 lifecycle-native scoring 支持 21 检查点。
 
 ## 验收标准
 

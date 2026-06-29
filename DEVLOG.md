@@ -2,6 +2,14 @@
 
 > 从原版 Ship 到 PM+工程一体化的超级个体。
 
+## 2026-06-29 — yishuship V2 生命周期协议
+- 将 yishuship 从“PM 前置 + 工程交付”升级为“产品全生命周期工作流”。
+- 保留 `/yishuship:pm-intake` 命令名，内部升级为 Product Lifecycle Intake。
+- 新增 21 个产品 checkpoint 的共享协议，阶段负责推进，checkpoint 负责不遗漏。
+- 评分心智统一为 `21 检查点 × 3 质量维度 × 3 分 = 189 分`。
+- `/yishuship:auto` 同步理解 product lifecycle，growth loop 作为 handoff 后可选 continuation。
+- PM gate 优先检查 V2 `product/*` 产物，并保留旧 `pm/*` 兼容。
+
 ## 2026-06-26 — 项目启动
 
 ### 背景

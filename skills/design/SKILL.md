@@ -4,7 +4,7 @@ version: 1.4.0
 description: >
   Plan implementation before coding: investigate the repo, write spec and plan,
   and validate with a peer. Use for "plan", "design approach", "scope", or any
-  coding task needing a plan. Not visual/system design or full /yishuyishuship:auto.
+  coding task needing a plan. Not visual/system design or full /yishuship:auto.
 allowed-tools:
   - Bash
   - Read
@@ -29,7 +29,7 @@ independently and produces its own spec for adversarial comparison.
 ## Runtime Resolution
 
 See `../.shared/runtime-resolution.md` for the host/peer concept and
-dispatch commands. In /yishuyishuship:design, the peer plays two roles:
+dispatch commands. In /yishuship:design, the peer plays two roles:
 **investigator** (Phase 2) and **drill agent** (Phase 6). Both use the
 same dispatch pattern from the shared reference.
 
@@ -54,7 +54,7 @@ implementable" check earns little here while adding a full peer
 round-trip. Peer investigation and diff stay on because they catch the
 real refactor failure mode — "moved complexity instead of removing it."
 
-If no scope mode is specified (e.g. standalone /yishuyishuship:design invocation),
+If no scope mode is specified (e.g. standalone /yishuship:design invocation),
 default to `full`.
 
 ## Process Flow
@@ -159,7 +159,7 @@ TodoWrite([
 
 ### Task ID
 
-1. If invoked by /yishuyishuship:auto, the task_id is provided.
+1. If invoked by /yishuship:auto, the task_id is provided.
 2. If invoked standalone, generate a concise deterministic task slug:
    ```bash
    TASK_ID=$(printf '%s' "<description>" \
@@ -273,8 +273,8 @@ code evidence was cited during debate, and the final disposition
   - **Standalone mode:** ask user via AskUserQuestion before proceeding.
     Record the user's ruling in diff-report.md with disposition
     `user-resolved` and what they decided. Update spec.md accordingly.
-  - **/yishuyishuship:auto mode:** do NOT ask user. Treat escalated items as BLOCKED
-    and return. `/yishuyishuship:auto` owns the only user-approval gate.
+  - **/yishuship:auto mode:** do NOT ask user. Treat escalated items as BLOCKED
+    and return. `/yishuship:auto` owns the only user-approval gate.
 - If diff reveals a critical investigation gap (e.g., the peer found
   important code you missed entirely), go back to Phase 2 for
   targeted re-investigation. Maximum 1 re-investigation loop.
@@ -394,8 +394,8 @@ Verify `spec.md` and `plan.md` are non-empty on disk, then output the report car
 | .ship/tasks/<task_id>/plan/diff-report.md | Divergence resolutions |
 
 ### Next Steps
-1. **Full workflow (recommended)** — /yishuyishuship:auto to implement, review, QA, refactor, and ship
-2. **Implement only** — /yishuyishuship:dev to execute this plan
+1. **Full workflow (recommended)** — /yishuship:auto to implement, review, QA, refactor, and ship
+2. **Implement only** — /yishuship:dev to execute this plan
 3. **Review the plan** — read the artifacts and give feedback
 ```
 

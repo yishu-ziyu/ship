@@ -1,9 +1,8 @@
 ---
 name: auto
-version: 0.1.0
+version: 0.2.0
 description: >
-  Run Ship's full production workflow from raw requirement to PR: design, dev,
-  E2E, review, QA, refactor, and handoff. Use only for explicit /yishuship:auto,
+  Run Ship's full production workflow from raw requirement to PR: pm-intake(product lifecycle) → PM Gate → design → dev → e2e → review → qa → refactor → handoff. Growth Loop is optional continuation after handoff, not mandatory. Use only for explicit /yishuship:auto,
   auto pipeline requests, or end-to-end delivery.
 allowed-tools:
   - Bash
@@ -15,6 +14,9 @@ allowed-tools:
 # Ship: Auto
 
 Full staged workflow for explicit end-to-end production delivery.
+pm-intake(product lifecycle) → PM Gate → design → dev → e2e → review → qa → refactor → handoff
+
+Growth Loop is optional continuation after handoff, not mandatory.
 
 ## Execution
 
@@ -32,6 +34,10 @@ fi
 
 Then follow the `/yishuship:auto` dispatch loop: read `PROMPT_FILE`, dispatch the
 agent, classify the report card, and call `complete <PHASE>`.
+
+## Compatibility Note
+
+The underlying orchestrator still dispatches the engineering state machine. V2 product lifecycle artifacts are enforced by PM Gate and by the handoff generated from `/yishuship:pm-intake`.
 
 ## Standalone Skill Boundary
 

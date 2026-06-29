@@ -117,7 +117,7 @@ Decide the approach based on **risk**, not file count or lens:
 |--------|---------------|-----|
 | Findings are within-file, tests exist, changes are local | **Quick** | Low risk — fix directly, verify as you go |
 | Cross-file dependencies change, no test coverage, large blast radius, or user says "refactor this module/codebase" | **Planned** | High risk — write an execution card so user can review before you start |
-| Not a code smell (algorithmic problem, runtime bug, feature request) | **Redirect** | Wrong tool — suggest /yishuyishuship:dev or /yishuyishuship:auto |
+| Not a code smell (algorithmic problem, runtime bug, feature request) | **Redirect** | Wrong tool — suggest /yishuship:dev or /yishuship:auto |
 
 **Lens-specific classification guidance** (classify determines quick vs planned path — NOT execution order within a path. Execution order is always structure → reuse → quality → efficiency regardless of classification):
 - **Structure**: surgical smells → quick; structural smells → planned (as before)
@@ -167,7 +167,7 @@ High-risk changes. Write an execution card first, get alignment, then execute.
    - Read `references/structural-card.md` for the template (45-60 lines).
    - For codebase-level work, read `references/rescue-playbook.md` for the full 8-step process.
    - Include findings from ALL lenses in the Evidence section, grouped by lens.
-   - In /yishuyishuship:auto mode: save to `.ship/tasks/<task_id>/refactor/spec.md` and proceed.
+   - In /yishuship:auto mode: save to `.ship/tasks/<task_id>/refactor/spec.md` and proceed.
    - In standalone mode: save to `.ship/refactor-card.md` (no task_id needed) and show the card to the user via AskUserQuestion before executing.
 
 2. If no test coverage for the code being changed: write characterization tests first.
@@ -208,7 +208,7 @@ Output the report card (read `skills/.shared/report-card.md` for the standard fo
 | .ship/tasks/<task_id>/refactor/spec.md | Execution card (planned path only) |
 
 ### Next Steps
-1. **Ship** — /yishuyishuship:handoff to create the PR (workflow continues here after refactor)
-2. **Review** — /yishuyishuship:review to verify no behavior changed (recommended for large refactors)
-3. **Continue** — /yishuyishuship:refactor on remaining deferred smells
+1. **Ship** — /yishuship:handoff to create the PR (workflow continues here after refactor)
+2. **Review** — /yishuship:review to verify no behavior changed (recommended for large refactors)
+3. **Continue** — /yishuship:refactor on remaining deferred smells
 ```

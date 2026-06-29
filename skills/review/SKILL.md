@@ -247,7 +247,7 @@ Output the report card (read `skills/.shared/report-card.md` for the standard fo
 | <task_dir>/review.md | Findings with evidence |
 
 ### Next Steps
-1. **Fix findings** — /yishuyishuship:dev to fix the reported bugs
-2. **QA next (if clean)** — /yishuyishuship:qa to test the running application
-3. **Full workflow** — /yishuyishuship:auto to handle fixes, QA, refactor, and shipping
+1. **Fix findings** — /yishuship:dev to fix the reported bugs
+2. **QA next (if clean)** — /yishuship:qa to test the running application
+3. **Full workflow** — /yishuship:auto to handle fixes, QA, refactor, and shipping
 ```

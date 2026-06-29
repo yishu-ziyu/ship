@@ -180,8 +180,8 @@ When invoked with `--recheck`:
 
 ## Reference Files
 
-- `../.shared/startup.md` — project discovery, install, start, verify (shared with /yishuyishuship:e2e)
-- `../.shared/cleanup.md` — mandatory cleanup contract (shared with /yishuyishuship:e2e)
+- `../.shared/startup.md` — project discovery, install, start, verify (shared with /yishuship:e2e)
+- `../.shared/cleanup.md` — mandatory cleanup contract (shared with /yishuship:e2e)
 - `references/browser.md` — web UI testing via agent-browser
 - `references/api.md` — API endpoint testing
 - `references/cli.md` — CLI testing
@@ -217,8 +217,8 @@ Output the report card (read `skills/.shared/report-card.md` for the standard fo
 | <qa_dir>/*.png | Screenshot evidence |
 
 ### Next Steps
-1. **Fix failures** — /yishuyishuship:dev to fix the reported issues
-2. **Refactor next (if passing)** — /yishuyishuship:refactor to clean up before shipping
-3. **Ship** — /yishuyishuship:handoff to create the PR (after refactor)
-4. **Full workflow** — /yishuyishuship:auto to handle fixes, refactor, and shipping
+1. **Fix failures** — /yishuship:dev to fix the reported issues
+2. **Refactor next (if passing)** — /yishuship:refactor to clean up before shipping
+3. **Ship** — /yishuship:handoff to create the PR (after refactor)
+4. **Full workflow** — /yishuship:auto to handle fixes, refactor, and shipping
 ```

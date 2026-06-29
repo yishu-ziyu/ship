@@ -241,7 +241,7 @@ test('launches', async () => {
 
 1. **Commit the scaffold separately from your first test.** One commit
    "chore: add playwright for e2e tests", one commit "test: cover <feature>"
-   — makes review easier. In /yishuyishuship:auto mode, the handoff phase squashes
+   — makes review easier. In /yishuship:auto mode, the handoff phase squashes
    however the repo prefers; at least keep the changes in logically
    separable blocks.
 2. **Verify the scaffold works before writing real tests.** Run the empty

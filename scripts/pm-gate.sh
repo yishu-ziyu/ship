@@ -4,10 +4,10 @@ set -u
 # yishuship PM gate — PreToolUse hook that enforces PM artifacts exist
 # before engineering phases can begin.
 #
-# Rules:
-#   /yishuship:design requires pm/01-discovery.md (discovery complete)
-#   /yishuship:dev    requires pm/02-definition.md (definition complete)
-#   /yishuship:auto   requires pm/01-discovery.md (at minimum)
+# Rules (V2 preference with V1 fallback):
+#   /yishuship:design requires V2 product handoff OR legacy pm/01-discovery.md
+#   /yishuship:dev    requires V2 product handoff OR legacy pm/02-definition.md
+#   /yishuship:auto   requires V2 product handoff OR legacy pm/01-discovery.md
 #
 # Only active when .ship/pm-state.yaml exists (PM workflow running).
 
@@ -34,6 +34,24 @@ TASK_ID=$(grep "^task_id:" "$STATE_FILE" 2>/dev/null | head -1 | sed 's/^task_id
 
 TASK_DIR="$CWD/.ship/tasks/$TASK_ID"
 PM_DIR="$TASK_DIR/pm"
+PRODUCT_DIR="$TASK_DIR/product"
+DELIVERY_DIR="$TASK_DIR/delivery"
+
+has_v2_product_handoff() {
+  [ -f "$PRODUCT_DIR/00-product-type.yaml" ] && \
+  [ -f "$PRODUCT_DIR/01-strategy.md" ] && \
+  [ -f "$PRODUCT_DIR/03-problem-solution.md" ] && \
+  [ -f "$PRODUCT_DIR/08-prd.md" ] && \
+  [ -f "$PRODUCT_DIR/09-tech-project-plan.md" ]
+}
+
+has_legacy_discovery() {
+  [ -f "$PM_DIR/01-discovery.md" ]
+}
+
+has_legacy_definition() {
+  [ -f "$PM_DIR/02-definition.md" ]
+}
 
 # Extract the skill being invoked from the agent prompt
 AGENT_PROMPT=$(echo "$INPUT" | jq -r '.tool_input.prompt // ""')
@@ -43,18 +61,18 @@ block() {
   jq -n --arg reason "$reason" '{"decision":"block","reason":$reason}'
 }
 
-# ── Rule 1: Design requires discovery ──────────────
+# ── Rule 1: Design requires product type (V2) or discovery (V1) ──────────────
 if echo "$AGENT_PROMPT" | grep -q "yishuship:design\|yishuship:auto"; then
-  if [ ! -f "$PM_DIR/01-discovery.md" ]; then
-    block "[yishuship PM gate] /yishuship:design 需要先完成发现阶段。请先运行 /yishuship:pm-intake 完成 01-discovery.md"
+  if ! has_v2_product_handoff && ! has_legacy_discovery; then
+    block "[yishuship PM gate] /yishuship:design or /yishuship:auto requires a complete V2 product handoff. Please run /yishuship:pm-intake and generate at least 00-product-type.yaml, 01-strategy.md, 03-problem-solution.md, 08-prd.md, and 09-tech-project-plan.md in the product/ directory. Old tasks can pass with pm/01-discovery.md."
     exit 0
   fi
 fi
 
-# ── Rule 2: Dev requires definition ────────────────
+# ── Rule 2: Dev requires design-spec (V2) or definition (V1) ────────────────
 if echo "$AGENT_PROMPT" | grep -q "yishuship:dev"; then
-  if [ ! -f "$PM_DIR/02-definition.md" ]; then
-    block "[yishuship PM gate] /yishuship:dev 需要先完成定义阶段。请先运行 /yishuship:pm-intake 完成 02-definition.md"
+  if ! has_v2_product_handoff && ! has_legacy_definition; then
+    block "[yishuship PM gate] /yishuship:dev needs executable product handoff, PRD and technical project plan. Old tasks can pass with pm/02-definition.md."
     exit 0
   fi
 fi

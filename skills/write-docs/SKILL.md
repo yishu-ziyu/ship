@@ -206,5 +206,5 @@ After writing or updating a doc, regenerate the index and output the report card
 ### Next Steps
 1. **Review the doc** — read it and verify claims against code
 2. **Design thinking** — /yishuship:arch-design if the architectural analysis needs more depth
-3. **Ship it** — /yishuyishuship:handoff to create a PR with the doc changes
+3. **Ship it** — /yishuship:handoff to create a PR with the doc changes
 ```

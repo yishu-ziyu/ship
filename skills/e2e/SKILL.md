@@ -193,7 +193,7 @@ workflow is constant:
      after 3, it's not a test issue — it's a bug.
    - Real bug → report it as a FAIL. Do NOT weaken the test to make it
      pass. If the pipeline is in auto mode, this triggers `e2e_fix`, which
-     routes back to /yishuyishuship:dev to fix the code.
+     routes back to /yishuship:dev to fix the code.
 
 ### Save artifacts
 
@@ -244,7 +244,7 @@ When invoked with `--recheck` (after `e2e_fix` made code changes):
 
 ## Standalone mode
 
-When invoked outside `/yishuyishuship:auto` (user types `/yishuyishuship:e2e` directly):
+When invoked outside `/yishuship:auto` (user types `/yishuship:e2e` directly):
 - There is no `<task_dir>`. Pick one: `.ship/e2e-<date>/` works as a
   fallback evidence directory, or write directly next to the repo's test
   directory if no evidence is needed.
@@ -267,8 +267,8 @@ When invoked outside `/yishuyishuship:auto` (user types `/yishuyishuship:e2e` di
 
 ## Reference files
 
-- `../.shared/startup.md` — bring the app up (shared with /yishuyishuship:qa)
-- `../.shared/cleanup.md` — mandatory cleanup contract (shared with /yishuyishuship:qa)
+- `../.shared/startup.md` — bring the app up (shared with /yishuship:qa)
+- `../.shared/cleanup.md` — mandatory cleanup contract (shared with /yishuship:qa)
 - `references/frameworks.md` — detection checks + framework selection matrix
 - `references/scaffolding.md` — install recipes for each default framework
 - `references/authoring.md` — writing good E2E tests (selectors, data,
@@ -305,7 +305,7 @@ format):
 | <repo>/tests/e2e/*.spec.ts | New/modified test files (committed) |
 
 ### Next Steps
-1. **Fix failures** — /yishuyishuship:dev to address real bugs found by new tests
-2. **Review next (if green)** — /yishuyishuship:review to check correctness of the code
-3. **Iterate tests** — /yishuyishuship:e2e --recheck after fixes
+1. **Fix failures** — /yishuship:dev to address real bugs found by new tests
+2. **Review next (if green)** — /yishuship:review to check correctness of the code
+3. **Iterate tests** — /yishuship:e2e --recheck after fixes
 ```

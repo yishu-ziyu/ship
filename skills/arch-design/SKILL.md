@@ -165,6 +165,6 @@ After writing the doc via write-docs, output the report card (read `skills/.shar
 
 ### Next Steps
 1. **Write the doc (required)** — /yishuship:write-docs with category design
-2. **Full workflow** — /yishuyishuship:auto to implement the design
-3. **Plan implementation** — /yishuyishuship:design to create executable stories
+2. **Full workflow** — /yishuship:auto to implement the design
+3. **Plan implementation** — /yishuship:design to create executable stories
 ```

@@ -1,6 +1,6 @@
 # Reviewer — Peer Cross-Validation Prompt
 
-Used in Phase 2 Step B of `/yishuyishuship:dev`. The peer reviews each story
+Used in Phase 2 Step B of `/yishuship:dev`. The peer reviews each story
 independently — preferably a different provider, always a different
 session from whoever implemented the code.
 
